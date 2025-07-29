@@ -19,8 +19,17 @@ export function isTest() {
 /**
  * Get the full application URL
  */
-export function getAppUrl(path = "") {
-  return `${env.NEXT_PUBLIC_APP_URL}${path}`;
-}
+export function getAppUrl(): string {
+  // Check if we're in a browser environment
+  if (typeof window !== "undefined") {
+    return window.location.origin;
+  }
 
-// Add your custom environment utility functions here
+  // Check if we have the environment variable
+  if (process.env.NEXT_PUBLIC_APP_URL) {
+    return process.env.NEXT_PUBLIC_APP_URL;
+  }
+
+  // Fallback for development
+  return "http://localhost:3000";
+}

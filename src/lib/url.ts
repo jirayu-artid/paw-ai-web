@@ -1,4 +1,5 @@
 import { env } from "@/env";
+import { getAppUrl } from "@/lib/env-utils";
 
 /**
  * URL Builder class for constructing and managing URLs
@@ -10,8 +11,7 @@ export class UrlBuilder {
   private hash: string;
 
   constructor(baseUrl?: string) {
-    this.baseUrl =
-      baseUrl || env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    this.baseUrl = baseUrl || getAppUrl();
     this.path = "";
     this.queryParams = new Map();
     this.hash = "";

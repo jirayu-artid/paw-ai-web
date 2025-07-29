@@ -1,6 +1,5 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
-import { getAppUrl } from "@/lib/utils";
 
 export const env = createEnv({
   /**
@@ -29,16 +28,7 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_APP_URL: (() => {
-      const url = process.env.NEXT_PUBLIC_APP_URL;
-      if (!url || url === "q") return getAppUrl();
-      try {
-        new URL(url);
-        return url;
-      } catch {
-        return getAppUrl();
-      }
-    })(),
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_SITE_NAME: process.env.NEXT_PUBLIC_SITE_NAME,
     NEXT_PUBLIC_SITE_DESCRIPTION: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
   },
